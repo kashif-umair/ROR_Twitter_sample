@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twitter</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+<div class="navbar ">
+  <div class="navbar-inner">
+
+    <a class="brand text-info" href="#">
+    	 Welcome to 
+		<stong class="text-success"> Twitter!! </stong> 
+		
+	</a>
+    <ul class="nav">
+      <li class="active"><%=  link_to 'Home' , tweets_path %></li>
+    </ul>
+	
+	
+    <form class="navbar-search ">
+  		<input type="text" class="search-query block" placeholder="Search">
+	</form>
+	<ul class="nav pull-right">
+	<% if(user_signed_in?) %>
+    
+	<li class="dropdown">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <%= current_user.email %>
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+    	<li> 
+    	<%= link_to("Log out <i class='icon-off'></i>".html_safe , destroy_user_session_path, :method => :delete , class: "text-success ") %> 
+		</li>
+    </ul>
+	
+  	</li>
+  	<% else %>
+  	<li>
+  			<%= link_to("Log in <i class='icon-user'></i>".html_safe , user_session_path , class: "text-success ") %> 
+  	</li>
+  	<%end%>
+   
+</ul>	
+	  </div>
+</div>
+
+
+<div class="container"> 
+<%= yield %>
+
+</div>
+
+
+</body>
+</html>
