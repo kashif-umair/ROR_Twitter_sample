@@ -3,10 +3,23 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!
   # GET /tweets
   # GET /tweets.json
+  def mytweets
+     @tweets = Tweet.where user_id: current_user.id
+     @tweet=Tweet.new
+     @page=2
+  end
+
+  def search
+    @query=params[:q]
+    @tweets = Tweet.where "content LIKE '%#{params[:q]}%'"
+    @page=0
+  end
+
+
   def index
      @tweet = Tweet.new
-    @tweets = Tweet.all
-    
+     @tweets = Tweet.all
+     @page=1
   end
 
   # GET /tweets/1

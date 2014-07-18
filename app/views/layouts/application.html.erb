@@ -11,26 +11,26 @@
 
 <div class="navbar ">
   <div class="navbar-inner">
+  <%=  link_to 'Welcome to Twitter' , tweets_path ,:class => "brand text-info" %>
 
-    <a class="brand text-info" href="#">
-    	 Welcome to 
-		<stong class="text-success"> Twitter!! </stong> 
-		
-	</a>
     <ul class="nav">
-      <li class="active"><%=  link_to 'Home' , tweets_path %></li>
+    <% page=["","",""]
+    page[@page]="active" %>
+
+      <li class="<%= page[1] %>" ><%=  link_to 'Home' , tweets_path %></li>
+      <li class="<%= page[2] %>"> <%=  link_to 'My Tweets' , mytweets_path %></li>
     </ul>
+    	<%= form_tag("/search", method: "get" , class: "navbar-search") do %>
+      <%= text_field_tag :q , nil , class: "search-query block" , placeholder: "Search" %>
+      <% end %>
 	
-	
-    <form class="navbar-search ">
-  		<input type="text" class="search-query block" placeholder="Search">
-	</form>
 	<ul class="nav pull-right">
 	<% if(user_signed_in?) %>
     
 	<li class="dropdown">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
       <%= current_user.email %>
+
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
