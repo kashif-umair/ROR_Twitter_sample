@@ -4,6 +4,7 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def mytweets
+    @pageTitle= "My Tweets"
      @tweets = Tweet.where user_id: current_user.id
      @tweet=Tweet.new
      @page=2
@@ -11,13 +12,17 @@ class TweetsController < ApplicationController
   end
 
   def search
-    @query=params[:q]
+    @pageTitle= "search results for  <small> #{params[:q]} </small>"
     @tweets = Tweet.where "content LIKE '%#{params[:q]}%'"
     @page=0
+     @tweet=Tweet.new
+     render "index.html.erb"
+
   end
 
 
   def index
+    @pageTitle= "Public Tweets"
      @tweet = Tweet.new
      @tweets = Tweet.all
      @page=1
