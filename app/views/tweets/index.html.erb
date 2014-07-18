@@ -5,8 +5,6 @@
 </div>
 <div class="row hidden-xs">
   
-  
-
 </div> 
 <div class="row">
   
@@ -20,13 +18,23 @@
   <tbody>
 
     <% @tweets.each do |tweet| %>
-      <tr class="">
-      <td>
+      <tr >
+      <td class="span2">
+        <%= image_tag tweet.user.avatar.url(:thumb) %>
+        </td>
+        <td class="span9">
        <blockquote> <%= tweet.content %> 
         <small><cite ><%= tweet.user.email %></cite>     </small>
+
         </blockquote>
       </td>
-
+     
+      <td class="span1 ">
+ <% if(tweet.user_id==current_user.id) %>
+      <%= link_to '<i class="icon-remove pull-right"> </i>'.html_safe ,tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
+         <% end %>
+      </td>
+    
         </tr>
     <% end %>
   </tbody>

@@ -15,17 +15,21 @@
 
     <ul class="nav">
     <% page=["","",""]
+    if @page.nil?
+     @page=0;
+   end 
     page[@page]="active" %>
 
-      <li class="<%= page[1] %>" ><%=  link_to 'Home' , tweets_path %></li>
-      <li class="<%= page[2] %>"> <%=  link_to 'My Tweets' , mytweets_path %></li>
-    </ul>
+      <li class="<%= page[1] %>" ><%=  link_to 'Home <i class="icon-home"> </i>'.html_safe , tweets_path %></li>
+
+      <% if(user_signed_in?) %>
+      <li class="<%= page[2] %>"> <%=  link_to 'My Tweets <i class="icon-pencil"> </i>'.html_safe , mytweets_path %></li>
+    
     	<%= form_tag("/search", method: "get" , class: "navbar-search") do %>
       <%= text_field_tag :q , nil , class: "search-query block" , placeholder: "Search" %>
       <% end %>
-	
+	</ul>
 	<ul class="nav pull-right">
-	<% if(user_signed_in?) %>
     
 	<li class="dropdown">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -35,18 +39,26 @@
     </a>
     <ul class="dropdown-menu">
     	<li> 
+        <%= link_to("Edit Profile <i class='icon-wrench'></i>".html_safe , edit_user_registration_path, class: "text-success ") %> 
+        
     	<%= link_to("Log out <i class='icon-off'></i>".html_safe , destroy_user_session_path, :method => :delete , class: "text-success ") %> 
+    
 		</li>
     </ul>
 	
   	</li>
+
+</ul> 
   	<% else %>
+    </ul>
+    <ul class="nav pull-right">
   	<li>
   			<%= link_to("Log in <i class='icon-user'></i>".html_safe , user_session_path , class: "text-success ") %> 
   	</li>
+
+  </ul> 
   	<%end%>
    
-</ul>	
 	  </div>
 </div>
 

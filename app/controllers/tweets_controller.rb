@@ -7,6 +7,7 @@ class TweetsController < ApplicationController
      @tweets = Tweet.where user_id: current_user.id
      @tweet=Tweet.new
      @page=2
+     render "index.html.erb"
   end
 
   def search
