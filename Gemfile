@@ -3,8 +3,18 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
+group :development, :test do
+  gem 'mysql2'
+end
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+  gem 'thin'
+end
+
+
 # Use mysql as the database for Active Record
-gem 'mysql2'
+
 
 # Use SCSS for stylesheets
 	gem 'sass-rails', '~> 4.0.0'
@@ -49,4 +59,4 @@ gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
 gem "paperclip", "~> 4.1"
-
+gem "cancan"
