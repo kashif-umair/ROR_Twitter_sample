@@ -3,6 +3,10 @@ class Ability
 
   def initialize(user)
 
+    user ||= User.new # guest user (not logged in)
+      can :read , :all
+      can  [:new ,:create] , Tweet
+      can [:destroy , :edit ], Tweet , :user_id => user.id
     
     # Define abilities for the passed in user here. For example:
     #

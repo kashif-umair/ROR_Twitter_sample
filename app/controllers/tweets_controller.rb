@@ -1,9 +1,11 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+   
   # GET /tweets
   # GET /tweets.json
   def mytweets
+
     @pageTitle= "My Tweets"
      @tweets = Tweet.where user_id: current_user.id
      @tweet=Tweet.new
@@ -13,7 +15,7 @@ class TweetsController < ApplicationController
 
   def search
     @pageTitle= "search results for  <small> #{params[:q]} </small>"
-    @tweets = Tweet.where "content LIKE '%#{params[:q]}%'"
+    @tweets = Tweet.where "content LIKE ?" ,"%#{params[:q]}%"
     @page=0
      @tweet=Tweet.new
      render "index.html.erb"
@@ -40,12 +42,15 @@ class TweetsController < ApplicationController
 
   # GET /tweets/1/edit
   def edit
+    authorize! :edit, @tweet
   end
 
   # POST /tweets
   # POST /tweets.json
   def create
+
     @tweet = Tweet.new(tweet_params)
+     authorize! :create, @tweet
 
     respond_to do |format|
       if @tweet.save
@@ -55,6 +60,7 @@ class TweetsController < ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
+
     end
   end
 

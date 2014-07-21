@@ -5,8 +5,9 @@
 <div class="well well-large">
 
 <h1 align="center">Sign in <i class="icon-user"> </i></h1>  
-
-
+<% if flash[:alert] %>
+ <div class="alert alert-error" > <%=flash[:alert]%> </div>
+ <%end %>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   
   <%= f.email_field :email, autofocus: true, class:"block stable_hieght" ,placeholder: "Email"  %>

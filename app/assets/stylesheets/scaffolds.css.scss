@@ -29,10 +29,8 @@ div {
   color: green;
 }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+.field_with_errors > input {
+  box-shadow: 0px -1px 15px red;
 }
 
 #error_explanation {
