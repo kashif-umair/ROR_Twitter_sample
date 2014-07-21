@@ -13,18 +13,26 @@ class TweetsController < ApplicationController
 
     @pageTitle= "My Tweets"
      @tweets = Tweet.where user_id: current_user.id
+     if @tweets.empty? 
+      flash[:alert]="No tweets to show"
+      end
      @tweet=Tweet.new
      @page=2
+      @button_text= "Tweet" 
      render "index.html.erb"
   end
 
   def search
     @pageTitle= "search results for  <small> #{params[:q]} </small>"
     @tweets = Tweet.where "content LIKE ?" ,"%#{params[:q]}%"
-    @page=0
+    if @tweets.empty? 
+      flash[:alert]="No tweets found"
+      end
+     @page=0
      @tweet=Tweet.new
+     @button_text= "Tweet" 
      render "index.html.erb"
-
+     
   end
 
 
@@ -32,7 +40,11 @@ class TweetsController < ApplicationController
     @pageTitle= "Public Tweets"
      @tweet = Tweet.new
      @tweets = Tweet.all
+     if @tweets.empty? 
+      flash[:alert]="No tweets to show"
+      end
      @page=1
+      @button_text= "Tweet" 
   end
 
   # GET /tweets/1
@@ -48,6 +60,7 @@ class TweetsController < ApplicationController
   # GET /tweets/1/edit
   def edit
     authorize! :edit, @tweet
+    @button_text= "Update" 
   end
 
   # POST /tweets

@@ -1,12 +1,12 @@
 <div class="row">
 <% if flash[:notice] %> 
-<div  class="alert alert-success">
+<div  class="alert alert-success block custom_margin10">
   <%= flash[:notice] %>
 </div>
 <% end %> 
 
 <% if flash[:alert] %> 
-<div  class="alert alert-error">
+<div  class="alert alert-error block custom_margin10">
   <%= flash[:alert] %>
 </div>
 <% end %> 
@@ -42,6 +42,8 @@
       <td class="span1 ">
  <% if(tweet.user_id==current_user.id) %>
       <%= link_to '<i class="icon-remove pull-right"> </i>'.html_safe ,tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+         <%= link_to '<i class="icon-edit pull-right"> </i>'.html_safe ,edit_tweet_path(tweet)%>
          <% end %>
       </td>
     
