@@ -3,22 +3,23 @@
     
   </div>
   <div class="well well-large span4">
-<h2>Sign up</h2>
+
+<h1 align="center">Sign up <i class="icon-user"> </i></h1>  
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html: {:multipart => true})  do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+  <%= f.email_field :email, autofocus: true ,class:"block stable_hieght" ,placeholder: "Email" %>
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+ 
+    <%= f.password_field :password, autocomplete: "off", class:"block stable_hieght" , placeholder: "Password"  %>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+  
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:"block stable_hieght" , placeholder: "Password Confirmation"  %>
   <div><%= f.file_field :avatar %></div>
 
-  <div><%= f.submit "Sign up" %></div>
+  <div><%= f.submit "Sign up",class: "stable_hieght btn btn-success btn-block " %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>

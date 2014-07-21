@@ -1,32 +1,41 @@
 <div class="row">
-<h2>Edit Profile</h2>
+
 <div class="span3">
-  
+
 </div>
+
 <div class="well well-large span4">
+
+<h1 align="center">Edit Profile <i class="icon-wrench"> </i></h1>  
+
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put ,:multipart => true}) do |f| %>
   <%= devise_error_messages! %>
 
   <%if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    Currently waiting confirmation for: <%= resource.unconfirmed_email %>
   <% end %>
+ 
+ <%= f.password_field :password, autocomplete: "off" ,class: "block" ,placeholder: "Passowrd" %>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %></div>
- <div><%= f.file_field :avatar %></div>
+ <%= f.password_field :password_confirmation, autocomplete: "off" ,class: "block" ,placeholder: "Passowrd Confirmation"%>
 
- <div><%= f.submit "Update" %></div>
+
+    <%= f.password_field :current_password, autocomplete: "off" ,class: "block" ,placeholder: "Current Passowrd"%>
+
+
+ <%= f.file_field :avatar , class: "block" %>
+
+ <%= f.submit "Update" , class: "btn btn-success btn-block block " %>
+ 
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3>Delete my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete ,  class: "btn btn-danger btn-block" %>
+
 </div>
 
 </div>

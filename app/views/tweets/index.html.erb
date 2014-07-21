@@ -6,7 +6,7 @@
 <div class="row hidden-xs">
   
 </div> 
-<div class="row">
+<div class="box row ">
   
 <table class="table table-hover table-responsive">
   <thead>
@@ -19,8 +19,8 @@
 
     <% @tweets.each do |tweet| %>
       <tr >
-      <td class="span2">
-        <%= image_tag tweet.user.avatar.url(:thumb) %>
+      <td class="span2" >
+        <%= image_tag tweet.user.avatar.url(:thumb) ,class: "img-circle img-profile"%>
         </td>
         <td class="span9">
        <blockquote> <%= tweet.content %> 
@@ -37,10 +37,11 @@
     
         </tr>
     <% end %>
+
   </tbody>
 </table>
-
-  </div>
-<br>
-
 <%= render 'form' %>
+  </div>
+
+
+

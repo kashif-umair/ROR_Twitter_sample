@@ -1,5 +1,8 @@
 # MySQL.  Versions 4.1 and 5.0 are recommended.
-#
+
+default: &default
+encoding: utf8
+pool: 5 
 # Install the MYSQL driver
 #   gem install mysql2
 #
@@ -29,7 +32,7 @@ test:
   password:
   socket: /var/run/mysqld/mysqld.sock
 
-production:
+
 production:
   <<: *default
   database: twitter_production

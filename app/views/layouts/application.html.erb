@@ -11,10 +11,13 @@
 
 <div class="navbar ">
   <div class="navbar-inner">
-  <%=  link_to 'Welcome to Twitter' , tweets_path ,:class => "brand text-info" %>
 
+  <div class="brand text-info">  Twitter
+  <img src="<%= asset_path('tweeting.png') %>" width="15px" />  </div>
+ 
     <ul class="nav">
-    <% page=["","",""]
+
+    <% page=["","",""]  
     if @page.nil?
      @page=0;
    end 
@@ -26,7 +29,7 @@
       <li class="<%= page[2] %>"> <%=  link_to 'My Tweets <i class="icon-pencil"> </i>'.html_safe , mytweets_path %></li>
     
     	<%= form_tag("/search", method: "get" , class: "navbar-search") do %>
-      <%= text_field_tag :q , nil , class: "search-query block" , placeholder: "Search" %>
+      <%= text_field_tag :q , nil , class: "search-query search_bar" , placeholder: "Search" %>
       <% end %>
 	</ul>
 	<ul class="nav pull-right">
@@ -48,7 +51,7 @@
 	
   	</li>
 
-</ul> 
+    </ul> 
   	<% else %>
     </ul>
     <ul class="nav pull-right">
@@ -63,8 +66,12 @@
 </div>
 
 
-<div class="container"> 
+<div class="main_container container  "> 
 <%= yield %>
+
+</div>
+<div class="footer" align="center">
+Copyright (C) 2014
 
 </div>
 
