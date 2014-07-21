@@ -15,7 +15,9 @@ class TweetsController < ApplicationController
      @tweets = Tweet.where user_id: current_user.id
      if @tweets.empty? 
       flash[:alert]="No tweets to show"
-      end
+    else
+      flash[:alert]=nil
+    end
      @tweet=Tweet.new
      @page=2
       @button_text= "Tweet" 
@@ -27,7 +29,9 @@ class TweetsController < ApplicationController
     @tweets = Tweet.where "content LIKE ?" ,"%#{params[:q]}%"
     if @tweets.empty? 
       flash[:alert]="No tweets found"
-      end
+     else
+      flash[:alert]=nil
+    end
      @page=0
      @tweet=Tweet.new
      @button_text= "Tweet" 
@@ -42,7 +46,9 @@ class TweetsController < ApplicationController
      @tweets = Tweet.all
      if @tweets.empty? 
       flash[:alert]="No tweets to show"
-      end
+      else
+      flash[:alert]=nil
+    end
      @page=1
       @button_text= "Tweet" 
   end
