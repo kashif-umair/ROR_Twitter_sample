@@ -1,7 +1,12 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-   
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end 
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    redirect_to root_url, :alert => "Record Not Found"
+  end
   # GET /tweets
   # GET /tweets.json
   def mytweets
