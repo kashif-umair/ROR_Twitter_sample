@@ -1,0 +1,34 @@
+  <table class="table table-over table-responsive">
+  <thead>
+    <tr>
+     <td></td>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% tweets.each do |tweet| %>
+      <tr >
+      <td class="span2" >
+        <%= image_tag tweet.user.avatar.url(:thumb) ,class: "img-circle img-profile"%>
+        </td>
+        <td class="span9">
+       <blockquote> <%= tweet.content %> 
+        <small><cite ><%= tweet.user.email %></cite>     </small>
+
+        </blockquote>
+      </td>
+     
+      <td class="span1 ">
+ <% if(tweet.user_id==current_user.id) %>
+      <%= link_to '<i class="icon-remove pull-right"> </i>'.html_safe ,tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+         <%= link_to '<i class="icon-edit pull-right"> </i>'.html_safe ,edit_tweet_path(tweet)%>
+         <% end %>
+      </td>
+    
+        </tr>
+    <% end %>
+
+  </tbody>
+</table>

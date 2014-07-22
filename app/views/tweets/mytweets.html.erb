@@ -3,24 +3,24 @@
 <div  class="alert alert-success block custom_margin10">
   <%= flash[:notice] %>
 </div>
-<% end %> 
-
-
-  <h1> Public tweets</h1>
+<% end %>
+  <h1> My tweets</h1>
 
 </div>
+
 <div class="row hidden-xs">
-  
+   
 <%  if @tweets.empty? %> 
 <div  class="alert alert-error block custom_margin10">
   No tweets to show
 </div>
 
 <% end %>
-</div> 
-<div class="box row "> 
-<%= render 'list' , :tweets => @tweets %>
 
+</div> 
+
+<div class="box row ">
+<%= render 'list' , :tweets => @tweets %>
 <%= render 'form' , :button_text => "Tweet" %>
   </div>
 

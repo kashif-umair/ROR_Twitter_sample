@@ -50,7 +50,7 @@ GEM
       sass (~> 3.2)
       thor
     builder (3.1.4)
-    cancan (1.6.10)
+    cancancan (1.9.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.4)
@@ -201,7 +201,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
-  cancan
+  cancancan (~> 1.9)
   coffee-rails (~> 4.0.0)
   devise
   jbuilder (~> 1.2)
