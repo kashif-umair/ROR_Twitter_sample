@@ -10,7 +10,7 @@
 
 </div>
 <div class="row hidden-xs">
-  
+<%# use if..else to avoid extra computation cycles %>
 <%  if @tweets.empty? %> 
 <div  class="alert alert-error block custom_margin10">
   No tweets to show

@@ -9,6 +9,8 @@ Twitter::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'tweets#index'
+  # Use resources instead of individual get
+  # https://github.com/bbatsov/rails-style-guide#member-collection-routes
   get 'mytweets' => 'tweets#mytweets' ,as: :mytweets
   get 'search' => 'tweets#search'
   # Example of regular route:

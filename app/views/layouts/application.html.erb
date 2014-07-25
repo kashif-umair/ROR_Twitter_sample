@@ -13,6 +13,8 @@
   <div class="navbar-inner">
 
   <div class="brand text-info">  Twitter
+  <%# use image_tag instead <img src="asset_path(***)" /> %>
+  <%# http://api.rubyonrails.org/classes/ActionView/Helpers/AssetTagHelper.html#method-i-image_tag %>
   <img src="<%= asset_path('tweeting.png') %>" width="15px" />  </div>
  
     <ul class="nav">
@@ -22,7 +24,13 @@
      @page=0;
    end 
     page[@page]="active" %>
-
+      <%
+        # Do this instead having need to use html_safe.
+        # <%= link_to tweets_path do %>
+        #   Home <i class='icon-home'></i>
+        # <% end %>
+        # http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to
+      %>
       <li class="<%= page[1] %>" ><%=  link_to 'Home <i class="icon-home"> </i>'.html_safe , tweets_path %></li>
 
       <% if(user_signed_in?) %>
@@ -42,6 +50,7 @@
     </a>
     <ul class="dropdown-menu">
     	<li> 
+      <%# no need to use brackets for a single method call %>
         <%= link_to("Edit Profile <i class='icon-wrench'></i>".html_safe , edit_user_registration_path, class: "text-success ") %> 
         
     	<%= link_to("Log out <i class='icon-off'></i>".html_safe , destroy_user_session_path, :method => :delete , class: "text-success ") %> 
@@ -56,6 +65,7 @@
     </ul>
     <ul class="nav pull-right">
   	<li>
+      <%# test this link. the path should be new_user_session_path %>
   			<%= link_to("Log in <i class='icon-user'></i>".html_safe , user_session_path , class: "text-success ") %> 
   	</li>
 

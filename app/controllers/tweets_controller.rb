@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  # set_tweet action can be removed by properly using cancan
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   
@@ -12,6 +13,7 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def mytweets
+    # if cancan properly used, these method calls would be removed.
     authorize! :mytweets, Tweet
      @tweets = Tweet.where user_id: current_user.id
      @tweet=current_user.tweets.new
@@ -39,7 +41,10 @@ class TweetsController < ApplicationController
 
   # GET /tweets/new
   def new
+    # @tweet would be nil here. So authorizing a nil? Instead should do following
+    # authroize! :new, Tweet
     authorize! :new, @tweet
+    # if you are loading @tweet here then remove :new from the action list of set_tweet before_action
     @tweet = current_user.tweets.new
 
   end
@@ -57,6 +62,10 @@ class TweetsController < ApplicationController
      authorize! :create, @tweet
      respond_to do |format|
       if @tweet.save
+        # you should use *_path helpers inside the app.
+        # Only use *_url helpers where you have to send links outside the app
+        # logically a user is redirected to his own tweets page or the tweet show page after success.
+        # Should show a success or error message in both cases.
         format.html { redirect_to tweets_url}
         format.json { render action: 'show', status: :created, location: @tweet }
       else
@@ -72,6 +81,8 @@ class TweetsController < ApplicationController
     authorize! :update, @tweet
     respond_to do |format|
       if @tweet.update(tweet_params)
+        # should use locales for messages. e.g. en.yml
+        # same case here, should show error message in case of failure
         format.html { redirect_to @tweet, notice: 'Tweet was successfully updated.' }
         format.json { head :no_content }
       else
@@ -85,8 +96,11 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1.json
   def destroy
     authorize! :destroy, @tweet
+    # check for success or failure and take relevant action.
     @tweet.destroy
     respond_to do |format|
+    # proper indentation required.
+    # should use *_path helper i.e. tweets_path (all relevant comments above also need to be taken care of)
     format.html { redirect_to tweets_url }
     format.json { head :no_content }
     end
@@ -95,6 +109,10 @@ class TweetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
+      # find throws an exception.
+      # in many cases we don't want the exception to be thrown if a record is not found
+      # so we should try to find tweet ourselves i.e. Tweet.find_by id: params[:id]
+      # then redirect user to root url if tweet is not found
       @tweet = Tweet.find(params[:id])
     end
 

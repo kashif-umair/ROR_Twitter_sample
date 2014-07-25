@@ -6,6 +6,7 @@ class Ability
       can :read , :all
       can :search, :all
       can [:new ,:create ,:mytweets] , Tweet
+      # :mytweets should be in the actions below
       can [:destroy , :edit  , :show , :update ], Tweet , :user_id => user.id
     # Define abilities for the passed in user here. For example:
     #

@@ -1,3 +1,7 @@
+<%
+  # don't use tables for layouts.
+  # google for 'why should not use table for layout' to learn why...
+%>
   <table class="table table-over table-responsive">
   <thead>
     <tr>
@@ -20,6 +24,7 @@
       </td>
      
       <td class="span1 ">
+      <%# instead the check below, check for the ability to delete this tweet %>
  <% if(tweet.user_id==current_user.id) %>
       <%= link_to '<i class="icon-remove pull-right"> </i>'.html_safe ,tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
 
